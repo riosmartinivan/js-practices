@@ -1,14 +1,43 @@
-var nameInput = prompt("Ingrese su nombre: ");
+var numA = parseFloat(prompt("Ingrese el primer numero: "));
 
-console.log("Hola " + nameInput + "!");
+var numB = parseFloat(prompt("Ingrese el segundo numero: "));
 
+var operation = prompt("Ingrese la operacion (+,-,*,/): ");
 
-var floatInput = parseFloat(prompt("Ingrese un numero: "));
-var savedNumber = 8;
+var result;
+switch(operation) {
+    case "+":
+        result = numA + numB;
+        break;
+    case "-":
+        result = numA - numB;
+        break;
+    case "*":
+        result = numA * numB;
+        break;
+    case "/":
+        result = numA / numB;
+        break;
+    default:
+        alert("Por favor, solo utilizar caracteres: +,-,*,/");
+}
 
-console.log(savedNumber + " + " + floatInput + " = " + (savedNumber+floatInput));
+/* Codigo con if / else
+if (operation === "+") {
+    result = numA + numB;
+} else if (operation === "-") {
+    result = numA - numB;
+} else if (operation === "*") {
+    result = numA * numB;
+} else if (operation === "/") {
+    result = numA / numB;
+} else {
+    alert("Por favor, solo utilizar caracteres: +,-,*,/")
+}
+*/
 
-
-var textInput = prompt("Ingrese cualquier texto: ");
-
-alert("Texto ingresado: " + textInput);
+if (result !== undefined) {
+    var resultStr = numA + " " + operation + " " + numB + " = " + result;
+    alert(resultStr);
+    console.log(resultStr);
+}
