@@ -1,43 +1,23 @@
-var numA = parseFloat(prompt("Ingrese el primer numero: "));
+const dias = ["Lunes","Martes","Miercoles","Jueves","Viernes","Sabado","Domingo",];
 
-var numB = parseFloat(prompt("Ingrese el segundo numero: "));
-
-var operation = prompt("Ingrese la operacion (+,-,*,/): ");
-
-var result;
-switch(operation) {
-    case "+":
-        result = numA + numB;
-        break;
-    case "-":
-        result = numA - numB;
-        break;
-    case "*":
-        result = numA * numB;
-        break;
-    case "/":
-        result = numA / numB;
-        break;
-    default:
-        alert("Por favor, solo utilizar caracteres: +,-,*,/");
+for (var i in dias) {
+    if (i === "6") {
+        alert("Dia 7 encontrado!");
+    }
+    
+    if (i%2 === 1) {
+        console.log("El dia " + dias[i] + " es par");
+    }
 }
 
-/* Codigo con if / else
-if (operation === "+") {
-    result = numA + numB;
-} else if (operation === "-") {
-    result = numA - numB;
-} else if (operation === "*") {
-    result = numA * numB;
-} else if (operation === "/") {
-    result = numA / numB;
-} else {
-    alert("Por favor, solo utilizar caracteres: +,-,*,/")
+/* Forma 2
+for (var i = 0; i < dias.length; i++) {
+    if (i === 6) {
+        alert("Dia 7 encontrado!");
+    }
+    
+    if (i%2 === 1) {
+        console.log("El dia " + dias[i] + " es par");
+    }
 }
 */
-
-if (result !== undefined) {
-    var resultStr = numA + " " + operation + " " + numB + " = " + result;
-    alert(resultStr);
-    console.log(resultStr);
-}
