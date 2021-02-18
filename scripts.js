@@ -1,96 +1,174 @@
-var items = [];
-var withIVA = false;
+var cart = new Cart();
 
 alert("Calculador de total de carrito de compras")
 while(true) {
-    let input = prompt("Ingrese una opcion: crear-carrito, sumar-iva, mas-caro, mas-barato, total, limpiar-carrito")
+    let input = prompt("Ingrese una opcion: añadir-items, sumar-iva, mas-caro, mas-barato, total, limpiar-carrito")
 
     switch(input) {
-        case "crear-carrito":
-            createCart();
+        case "añadir-items":
+            addItems();
             break;
         case "sumar-iva":
-            addIVA();
+            cart.addIVA();
             break;
         case "mas-caro":
-            pricierItem();
+            alert("El item mas caro sale (sin IVA): " + cart.getPricierCostWOIVA());
             break;
         case "mas-barato":
-            cheaperItem();
+            alert("El item mas caro sale (sin IVA): " + cart.getCheaperCostWOIVA());
             break;
         case "total":
-            totalSum();
+            alert("Total: " + cart.total);
             break;
         case "limpiar-carrito":
-            resetItems();
+            cart.resetItems();
             break;
         default:
             alert("Por favor, elegir una de las opciones disponibles");
     }
 }
 
-function createCart() {
+/**
+ * Calls the cart.addItem function until interrupted.
+ */
+function addItems() {
     while(true) {
-        let input = prompt("Ingrese el costo de un item (o cualquier letra para finalizar)")
+        let input = prompt("Ingrese el costo de un item (o cualquier letra para finalizar)");
         if (!isNumber(input)) {
             break;
+        }
+
+        let iva;
+        while (true) {
+            let ivaInput = prompt("IVA incluido? (si / no)");
+            if (ivaInput === "si") {
+                iva = true;
+                break;
+            } else if (ivaInput === "no") {
+                iva = false;
+                break;
+            }
+        }
+
+        cart.addItem(new Item(parseFloat(input), iva));
+    }
+}
+
+/**
+ * Cart object.
+ */
+function Cart() {
+    this.items = [];
+    this.total = 0;
+
+    /**
+     * Adds an item to the cart.
+     * Updates the total.
+     * Defines if the item is the priciest or the chepear.
+     * 
+     * @param {Item} item to be added
+     */
+    this.addItem = function(item) {
+        this.items.push(item);
+
+        this.total += item.price;
+
+        let itemWOIVA = (item.withIVA === true) ? item.price/1.21 : item.price;
+        if (this.pricier === undefined) {
+            this.pricier = item;
         } else {
-            items = [];
-            withIVA = false;
-            
-            items.push(parseFloat(input));
+            let pricierWOIVA = (this.pricier.withIVA === true) ? this.pricier.price/1.21 : this.pricier.price;
+            if (itemWOIVA > pricierWOIVA) {
+                this.pricier = item;
+            }
+        }
+        if (this.cheaper === undefined) {
+            this.cheaper = item;
+        } else {
+            let cheaperWOIVA = (this.cheaper.withIVA === true) ? this.cheaper.price/1.21 : this.cheaper.price;
+            if (itemWOIVA < cheaperWOIVA) {
+                this.cheaper = item;
+            }
+        }
+    }
+
+    /**
+     * Returns the pricier item cost without IVA.
+     */
+    this.getPricierCostWOIVA = function() {
+        if (this.pricier == undefined) return undefined;
+        return (this.pricier.withIVA === true) ? this.pricier.price/1.21 : this.pricier.price;
+    }
+
+    /**
+     * Returns the cheaper item cost without IVA.
+     */
+    this.getCheaperCostWOIVA = function() {
+        if (this.cheaper == undefined) return undefined;
+        return (this.cheaper.withIVA === true) ? this.cheaper.price/1.21 : this.cheaper.price;
+    }
+
+    /**
+     * Adds IVA to all the items.
+     * Recalculates the total.
+     */
+    this.addIVA = function() {
+        for (var i in this.items) {
+            this.items[i].addIVA();
+        }
+
+        this.recalcTotal();
+    }
+
+    /**
+     * Recalculates the total.
+     */
+    this.recalcTotal = function() {
+        this.total = 0;
+        for (var item of this.items) {
+            this.total += item.price;
+        }
+    }
+
+    /**
+     * Resets the items.
+     * Resets the total.
+     * Resets the pricier/chepear.
+     */
+    this.resetItems = function() {
+        this.items = [];
+        this.total = 0;
+        this.pricier = undefined;
+        this.cheaper = undefined;
+    }
+}
+
+/**
+ * The Item object.
+ * 
+ * @param {number} price the item price.
+ * @param {boolean} withIVA if the item includes IVA.
+ */
+function Item(price, withIVA) {
+    this.price = price;
+    this.withIVA = withIVA;
+
+    /**
+     * Add IVA to the Item if not already applied.
+     */
+    this.addIVA = function() {
+        if (this.withIVA === false) {
+            this.price = this.price*1.21;
+            this.withIVA = true;
         }
     }
 }
 
-function addIVA() {
-    if (withIVA === true) {
-        alert("IVA ya añadido");
-        return;
-    } else if (items.length > 0) {
-        withIVA = true;
-        for (var i in items) {
-            items[i] = items[i]*1.21;
-        }
-    }
-}
-
-function pricierItem() {
-    let pricier;
-    for (var item of items) {
-        if (pricier === undefined || item > pricier) {
-            pricier = item;
-        }
-    }
-
-    alert("El item mas caro sale: " + pricier);
-}
-
-function cheaperItem() {
-    let cheaper;
-    for (var item of items) {
-        if (cheaper === undefined || item < cheaper) {
-            cheaper = item;
-        }
-    }
-
-    alert("El item mas barato sale: " + cheaper);
-}
-
-function totalSum() {
-    let total = 0;
-    for (var item of items) {
-        total += item;
-    }
-
-    alert("El total es: " + total);
-}
-
-function resetItems() {
-    items = [];
-    withIVA = false;
-}
-
+/**
+ * Checks if a string can be a valid number.
+ * 
+ * @param {string} str the string to be checked.
+ */
 function isNumber(str) {
     if (typeof str != "string") {
         return false;
