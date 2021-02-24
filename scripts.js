@@ -1,3 +1,119 @@
+/**
+ * The Item object.
+ * 
+ * @constructor
+ * @param {number} price the item price.
+ * @param {boolean} withIVA if the item includes IVA.
+ */
+class Item {
+    constructor(price, withIVA) {
+        this.price = price;
+        this.withIVA = withIVA;
+    }
+
+    /**
+     * Add IVA to the Item if not already applied.
+     */
+    addIVA = function() {
+        if (this.withIVA === false) {
+            this.price = this.price*1.21;
+            this.withIVA = true;
+        }
+    }
+}
+
+/**
+ * Cart object.
+ */
+class Cart {
+    constructor() {
+        this.items = [];
+        this.total = 0;
+    }
+
+    /**
+     * Adds an item to the cart.
+     * Updates the total.
+     * Defines if the item is the priciest or the chepear.
+     * 
+     * @param {Item} item to be added
+     */
+    addItem = function(item) {
+        this.items.push(item);
+
+        this.total += item.price;
+
+        let itemWOIVA = (item.withIVA === true) ? item.price/1.21 : item.price;
+        if (this.pricier === undefined) {
+            this.pricier = item;
+        } else {
+            let pricierWOIVA = (this.pricier.withIVA === true) ? this.pricier.price/1.21 : this.pricier.price;
+            if (itemWOIVA > pricierWOIVA) {
+                this.pricier = item;
+            }
+        }
+        if (this.cheaper === undefined) {
+            this.cheaper = item;
+        } else {
+            let cheaperWOIVA = (this.cheaper.withIVA === true) ? this.cheaper.price/1.21 : this.cheaper.price;
+            if (itemWOIVA < cheaperWOIVA) {
+                this.cheaper = item;
+            }
+        }
+    }
+
+    /**
+     * Returns the pricier item cost without IVA.
+     */
+    getPricierCostWOIVA = function() {
+        if (this.pricier == undefined) return undefined;
+        return (this.pricier.withIVA === true) ? this.pricier.price/1.21 : this.pricier.price;
+    }
+
+    /**
+     * Returns the cheaper item cost without IVA.
+     */
+    getCheaperCostWOIVA = function() {
+        if (this.cheaper == undefined) return undefined;
+        return (this.cheaper.withIVA === true) ? this.cheaper.price/1.21 : this.cheaper.price;
+    }
+
+    /**
+     * Adds IVA to all the items.
+     * Recalculates the total.
+     */
+    addIVA = function() {
+        for (var i in this.items) {
+            this.items[i].addIVA();
+        }
+
+        this.recalcTotal();
+    }
+
+    /**
+     * Recalculates the total.
+     */
+    recalcTotal = function() {
+        this.total = 0;
+        for (var item of this.items) {
+            this.total += item.price;
+        }
+    }
+
+    /**
+     * Resets the items.
+     * Resets the total.
+     * Resets the pricier/chepear.
+     */
+    resetItems = function() {
+        this.items = [];
+        this.total = 0;
+        this.pricier = undefined;
+        this.cheaper = undefined;
+    }
+}
+
+
 var cart = new Cart();
 
 alert("Calculador de total de carrito de compras")
@@ -51,116 +167,6 @@ function addItems() {
         }
 
         cart.addItem(new Item(parseFloat(input), iva));
-    }
-}
-
-/**
- * Cart object.
- */
-function Cart() {
-    this.items = [];
-    this.total = 0;
-
-    /**
-     * Adds an item to the cart.
-     * Updates the total.
-     * Defines if the item is the priciest or the chepear.
-     * 
-     * @param {Item} item to be added
-     */
-    this.addItem = function(item) {
-        this.items.push(item);
-
-        this.total += item.price;
-
-        let itemWOIVA = (item.withIVA === true) ? item.price/1.21 : item.price;
-        if (this.pricier === undefined) {
-            this.pricier = item;
-        } else {
-            let pricierWOIVA = (this.pricier.withIVA === true) ? this.pricier.price/1.21 : this.pricier.price;
-            if (itemWOIVA > pricierWOIVA) {
-                this.pricier = item;
-            }
-        }
-        if (this.cheaper === undefined) {
-            this.cheaper = item;
-        } else {
-            let cheaperWOIVA = (this.cheaper.withIVA === true) ? this.cheaper.price/1.21 : this.cheaper.price;
-            if (itemWOIVA < cheaperWOIVA) {
-                this.cheaper = item;
-            }
-        }
-    }
-
-    /**
-     * Returns the pricier item cost without IVA.
-     */
-    this.getPricierCostWOIVA = function() {
-        if (this.pricier == undefined) return undefined;
-        return (this.pricier.withIVA === true) ? this.pricier.price/1.21 : this.pricier.price;
-    }
-
-    /**
-     * Returns the cheaper item cost without IVA.
-     */
-    this.getCheaperCostWOIVA = function() {
-        if (this.cheaper == undefined) return undefined;
-        return (this.cheaper.withIVA === true) ? this.cheaper.price/1.21 : this.cheaper.price;
-    }
-
-    /**
-     * Adds IVA to all the items.
-     * Recalculates the total.
-     */
-    this.addIVA = function() {
-        for (var i in this.items) {
-            this.items[i].addIVA();
-        }
-
-        this.recalcTotal();
-    }
-
-    /**
-     * Recalculates the total.
-     */
-    this.recalcTotal = function() {
-        this.total = 0;
-        for (var item of this.items) {
-            this.total += item.price;
-        }
-    }
-
-    /**
-     * Resets the items.
-     * Resets the total.
-     * Resets the pricier/chepear.
-     */
-    this.resetItems = function() {
-        this.items = [];
-        this.total = 0;
-        this.pricier = undefined;
-        this.cheaper = undefined;
-    }
-}
-
-/**
- * The Item object.
- * 
- * @param {number} price the item price.
- * @param {boolean} withIVA if the item includes IVA.
- */
-function Item(price, withIVA) {
-    this.price = price;
-    this.withIVA = withIVA;
-
-    /**
-     * Add IVA to the Item if not already applied.
-     */
-    this.addIVA = function() {
-        if (this.withIVA === false) {
-            this.price = this.price*1.21;
-            this.withIVA = true;
-        }
     }
 }
 
