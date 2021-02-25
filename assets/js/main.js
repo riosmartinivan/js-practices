@@ -7,7 +7,7 @@ function main() {
     let carts = [];
 
     while (true) {
-        let inputInicial = prompt("Opciones: listar carritos, crear carrito, eliminar carrito, total general, ingresar a carrito, limpiar carritos");
+        let inputInicial = prompt("Opciones: listar carritos, crear carrito, ordenar carritos, eliminar carrito, total general, ingresar a carrito, limpiar carritos");
 
         switch (inputInicial.toLowerCase().trim()) {
             case "listar carritos":
@@ -19,6 +19,10 @@ function main() {
             case "crear-carrito":
                 carts.push(new Cart(prompt("Nombre: ")));
 
+                break;
+            case "ordenar carritos":
+            case "ordenar-carritos":
+                carts.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0))
                 break;
             case "eliminar carrito":
             case "eliminar-carrito":
