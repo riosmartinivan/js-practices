@@ -1,5 +1,7 @@
-import { addItems, useCart, removeCart } from './functions/CartFunctions.js';
+import { addItems, useCart } from './functions/CartFunctions.js';
+import { removeItem } from './functions/util.js';
 import { Cart } from './model/Cart.js';
+import { capitalizeFirstLetter } from './functions/util.js';
 
 
 function main() {
@@ -13,12 +15,10 @@ function main() {
             case "listar carritos":
             case "listar-carritos":
                 alert("Carritos: " + carts.map(cart => cart.name));
-
                 break;
             case "crear carrito":
             case "crear-carrito":
-                carts.push(new Cart(prompt("Nombre: ")));
-
+                carts.push(new Cart(capitalizeFirstLetter(prompt("Nombre: "))));
                 break;
             case "ordenar carritos":
             case "ordenar-carritos":
@@ -26,8 +26,7 @@ function main() {
                 break;
             case "eliminar carrito":
             case "eliminar-carrito":
-                carts = removeCart(carts, prompt("Carrito a eliminar: "));
-
+                carts = removeItem(carts, capitalizeFirstLetter(prompt("Nombre del carrito a eliminar: ")));
                 break;
             case "total general":
             case "total-general":
@@ -35,7 +34,7 @@ function main() {
                 break;
             case "ingresar a carrito":
             case "ingresar-a-carrito":
-                let name = prompt("Nombre: ");
+                let name = capitalizeFirstLetter(prompt("Nombre: "));
                 let selectedCart = carts.filter(obj => {
                     return obj.name === name
                 });
@@ -45,7 +44,6 @@ function main() {
                 }
 
                 useCart(selectedCart[0]);
-
                 break;
             case "limpiar carritos":
             case "limpiar-carritos":

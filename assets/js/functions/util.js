@@ -19,3 +19,15 @@ export function isNumber(str) {
 export function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
+
+/**
+ * Removes an item from an array of objects by object name.
+ * 
+ * @param {Array.<Object>} array the array.
+ * @param {string} name the name of the object to be removed.
+ */
+export function removeItem(carts, name) {
+    return carts.filter(function(obj) {
+        return obj.name !== name;
+    });
+}

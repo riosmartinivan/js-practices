@@ -1,12 +1,11 @@
 import { Item } from './Item.js';
-import { capitalizeFirstLetter } from '../functions/util.js';
 
 /**
  * Cart object.
  */
 export class Cart {
     constructor(name) {
-        this.name = capitalizeFirstLetter(name);
+        this.name = name;
         this.items = [];
         this.total = 0;
     }

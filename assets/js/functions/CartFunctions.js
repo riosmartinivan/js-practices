@@ -1,4 +1,4 @@
-import { isNumber, capitalizeFirstLetter } from './util.js';
+import { isNumber, removeItem, capitalizeFirstLetter } from './util.js';
 import { Item } from '../model/Item.js';
 import { Cart } from '../model/Cart.js';
 
@@ -14,6 +14,8 @@ export function addItems(cart) {
             break;
         }
 
+        let name = capitalizeFirstLetter(prompt("Ingrese el nombre del item"));
+
         let iva;
         while (true) {
             let ivaInput = prompt("IVA incluido? (si / no)");
@@ -26,7 +28,7 @@ export function addItems(cart) {
             }
         }
 
-        cart.addItem(new Item(parseFloat(input), iva));
+        cart.addItem(new Item(name, parseFloat(input), iva));
     }
 }
 
@@ -38,7 +40,7 @@ export function addItems(cart) {
  */
 export function useCart(cart) {
     while (true) {
-        let input = prompt("Opciones: ver nombre, cambiar nombre, añadir items, sumar iva, mas caro, mas barato, total, limpiar items, volver")
+        let input = prompt("Opciones: ver nombre, cambiar nombre, añadir items, listar items, ordenar items, ver item, eliminar item, sumar iva, mas caro, mas barato, total, limpiar items, volver")
     
         switch (input.toLowerCase().trim()) {
             case "ver nombre":
@@ -52,6 +54,32 @@ export function useCart(cart) {
             case "añadir items":
             case "añadir-items":
                 addItems(cart);
+                break;
+            case "listar items":
+            case "listar-items":
+                alert("Items: " + cart.items.map(item => item.name));
+                break;
+            case "ordenar items":
+            case "ordenar-items":
+                cart.items.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0))
+                break;
+            case "ver item":
+            case "ver-item":
+                let name = capitalizeFirstLetter(prompt("Nombre: "));
+                let selectedItem = cart.items.filter(obj => {
+                    return obj.name === name
+                });
+                console.log(selectedItem);
+                if (selectedItem.length < 1) {
+                    alert("No se encontro el item: " + name);
+                    break;
+                }
+
+                alert("Nombre: " + name + ", costo: " + selectedItem[0].price + ", con IVA: " + selectedItem[0].withIVA);
+                break;
+            case "eliminar item":
+            case "eliminar-item":
+                cart.items = removeItem(cart.items, capitalizeFirstLetter(prompt("Nombre del item a eliminar: ")));
                 break;
             case "sumar iva":
             case "sumar-iva":
@@ -78,16 +106,4 @@ export function useCart(cart) {
                 alert("Por favor, elegir una de las opciones disponibles");
         }
     }
-}
-
-/**
- * Removes a cart by name from an array of carts.
- * 
- * @param {Array.<Cart>} carts the array of carts.
- * @param {string} name the name of the cart to be removed.
- */
-export function removeCart(carts, name) {
-    return carts.filter(function(obj) {
-        return obj.name !== name;
-    });
 }

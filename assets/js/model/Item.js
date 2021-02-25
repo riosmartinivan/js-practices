@@ -2,11 +2,13 @@
  * The Item object.
  * 
  * @constructor
+ * @param {string} name the item name.
  * @param {number} price the item price.
  * @param {boolean} withIVA if the item includes IVA.
  */
 export class Item {
-    constructor(price, withIVA) {
+    constructor(name, price, withIVA) {
+        this.name = name;
         this.price = price;
         this.withIVA = withIVA;
     }
