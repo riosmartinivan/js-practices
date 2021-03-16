@@ -1,0 +1,60 @@
+// Functions
+@mixin transform($translate) {
+	transform: $translate;
+}
+
+@mixin border-radius($radius) {
+	border-radius: $radius;
+}
+
+@mixin transition($transition) {
+	transition: $transition;
+}
+
+@mixin box-shadow($values, $color) {
+	box-shadow: $values $color;
+}
+
+@mixin box-sizing($type) {
+	box-sizing: $type;
+}
+
+@keyframes bounce {
+	0% {
+		@include transform(translateY(0));
+    }
+    
+	20% {
+		@include transform(translateY(0));
+    }
+    
+	40% {
+		@include transform(translateY(-10px));
+	}
+	
+	50% {
+		@include transform(translateY(0));
+    }
+    
+	60% {
+		@include transform(translateY(-5px));
+	}
+
+	80% {
+		@include transform(translateY(0));
+    }
+
+	100% {
+		@include transform(translateY(0));
+    }
+}
+
+@keyframes color_change {
+	from {
+		color: $main-color-light;
+    }
+    
+	to {
+		color: $main-color-dark;
+	}
+}

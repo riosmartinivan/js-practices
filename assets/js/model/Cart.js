@@ -2,6 +2,11 @@ import { Item } from './Item.js';
 
 /**
  * Cart object.
+ * 
+ * @constructor
+ * @param {string} name the cart name.
+ * @param {Array.<Item>} items the items.
+ * @param {number} total the total of the cart.
  */
 export class Cart {
     constructor(name) {

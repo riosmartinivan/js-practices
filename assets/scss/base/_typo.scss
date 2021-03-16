@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Titillium+Web&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+// Fonts
+$font_0: Titillium Web;
+$font_1: Roboto;
+$font_2: sans-serif;
+
+// Resets
+* {
+	@include box-sizing(border-box);
+
+    margin:0;
+    padding:0;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	font-family: $font_0, $font_2;
+}
+
+h1 {
+	font-size: 66px;
+	font-weight: 700;
+	line-height: 80px;
+}
+
+h2 {
+	font-size: 48px;
+	margin-bottom: 30px;
+}
+
+h3 {
+	font-size: 33px;
+}
+
+p {
+	font-size: 18px;
+	color: $dark-color;
+	opacity: 0.5;
+	line-height: 1.8;
+}
