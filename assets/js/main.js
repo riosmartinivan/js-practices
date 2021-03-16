@@ -3,7 +3,9 @@ import { removeItem } from './functions/util.js';
 import { Cart } from './model/Cart.js';
 import { capitalizeFirstLetter } from './functions/util.js';
 
+sessionStorage.clear();
 
+/*
 function main() {
 
     let carts = [];
@@ -57,3 +59,4 @@ function main() {
 
 alert("Sistema de carrito de compras")
 main();
+*/

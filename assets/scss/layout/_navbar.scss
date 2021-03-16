@@ -1,0 +1,50 @@
+// Navbar
+#nav-container {
+	@include transition(top 0.5s ease);
+	@include box-shadow(1px 2px 10px, $black_10);
+
+	min-height: 100px;
+}
+
+.header-container__navbar-brand {
+	width: 70px;
+	height: 70px;
+}
+
+.brand {
+	@include border-radius(10px);
+	@include transition(transform 2.5s);
+
+	background-size: contain;
+	background-position: center;
+}
+
+.header-container__nav-link {
+	color: $main-color-dark;
+}
+
+.header-container__nav-item:not(.active) a:hover {
+	animation: color_change 1s infinite alternate;
+}
+
+.header-container__navbar-toggler {
+	font-size: 40px;
+	
+	&:focus {
+		outline: none;
+	}
+}
+
+.header-container__form-control {
+	@include border-radius(2px);
+
+	font-size: 14px;
+	border: 1px solid $color_silver;
+	padding: 15px;
+
+	&:focus {
+		border: 1px solid $dark-color;
+		outline: none;
+		box-shadow: none;
+	}
+}

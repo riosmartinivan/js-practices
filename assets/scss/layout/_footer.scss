@@ -1,0 +1,47 @@
+// Footer
+.footer {
+	padding: 80px 0;
+	text-align: center;
+    color: white;
+    
+	a {
+        color: white;
+        
+		&:hover {
+			color: white;
+		}
+    }
+}
+
+.footer__item {
+	padding: 10px 15px;
+
+	&--menu {
+		@extend .footer__item;
+	}
+}
+
+.footer__brand {
+	display: inline-block;
+	width: 54px;
+	height: 54px;
+}
+
+.footer__item-img:hover {
+	animation: bounce 1s;
+}
+
+@media(max-width: 575px) {
+	h1 {
+		font-size: 40px;
+		line-height: normal;
+    }
+    
+	.footer__item {
+		&--menu {
+			display: block !important;
+			padding: 20px 0 !important;
+			font-size: 20px;
+		}
+	}
+}

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Cart</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link href="../assets/css/styles.css" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- Header -->
+  <nav id="nav-container" class="navbar fixed-top navbar-expand-lg navbar-light d-block bg-light">
+    <div class="header-container container">
+       <span class="header-container__navbar-brand brand" href="#"></span>
+       <button class="header-container__navbar-toggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <img src="../assets/img/menu.svg" alt="">
+       </button>
+       <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+             <li class="header-container__nav-item nav-item">
+                <a class="header-container__nav-link nav-link" href="../index.html">Inicio<span class="sr-only">(current)</span></a>
+             </li>
+          </ul>
+          <ul class="navbar-nav ml-auto">
+            <li class="header-container__nav-item nav-item active">
+              <a class="header-container__nav-link nav-link" href="">Ir a carrito</a>
+            </li>
+              <li class="header-container__nav-item nav-item dropdown">
+                <a class="header-container__nav-link nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Login</a>
+                
+                <!-- Login form -->
+                <div class="dropdown-menu">
+                   <form role="form" class="login-form  px-4 py-3">
+                     <div class="form-group">
+                       <label for="dropdownFormEmail">Email</label>
+                       <input id="login-email" type="email" class="header-container__form-control form-control" id="dropdownFormEmail" placeholder="example@gmail.com">
+                     </div>
+                     <div class="form-group">
+                       <label for="dropdownFormPassword">Contraseña</label>
+                       <input id="login-passwd" type="password" class="form-control" id="dropdownFormPassword" placeholder="Contraseña">
+                     </div>
+                     <div class="form-check">
+                       <input type="checkbox" class="form-check-input" id="dropdownCheck">
+                       <label class="form-check-label" for="dropdownCheck">Recordar</label>
+                     </div>
+                     <button id="login-btn" type="submit" class="btn btn-primary w-100">Ingresar</button>
+                   </form>
+                   <div class="dropdown-divider"></div>
+                   <a class="dropdown-item launch-modal" href="#" data-modal-id="modal-register">No tienes un usuario? Registrate!</a>
+                   <a class="dropdown-item" href="#">Olvidaste tu contraeña?</a>
+                 </div>
+             </li>
+             <li class="header-container__nav-item nav-item">
+                <a class="header-container__nav-link nav-link launch-modal" href="#" data-modal-id="modal-register">Registrarse</a>
+             </li>            
+             <li class="header-container__nav-item nav-item">
+                <a class="header-container__nav-link nav-link" target="__blank" href="https://github.com/riosmartinivan/js-practices">
+                   <span class="d-none d-sm-inline">View on GitHub </span> <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false" width="1em" height="1em" style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);" preserveAspectRatio="xMidYMid meet" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59c.4.07.55-.17.55-.38c0-.19-.01-.82-.01-1.49c-2.01.37-2.53-.49-2.69-.94c-.09-.23-.48-.94-.82-1.13c-.28-.15-.68-.52-.01-.53c.63-.01 1.08.58 1.23.82c.72 1.21 1.87.87 2.33.66c.07-.52.28-.87.51-1.07c-1.78-.2-3.64-.89-3.64-3.95c0-.87.31-1.59.82-2.15c-.08-.2-.36-1.02.08-2.12c0 0 .67-.21 2.2.82c.64-.18 1.32-.27 2-.27c.68 0 1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82c.44 1.1.16 1.92.08 2.12c.51.56.82 1.27.82 2.15c0 3.07-1.87 3.75-3.65 3.95c.29.25.54.73.54 1.48c0 1.07-.01 1.93-.01 2.2c0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z" fill="#626262"/></svg>
+                </a>
+             </li>
+          </ul>
+       </div>
+    </div>
+  </nav>
+
+  <!-- Mi carrito -->
+  <section id="my-cart" class="bgLightGrey vh-100 main-section">
+    <div class="container">
+        <div class="content-center">
+          <h2 class="text-center">Carrito</h2>
+
+          <nav class="navbar navbar-expand-lg navbar-light">
+            <a class="navbar-brand" href="#">Nombre de carrito</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#subnavbarSupportedContent" aria-controls="subnavbarSupportedContent" aria-expanded="false" aria-label="Toggle subnavigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          
+            <div class="collapse navbar-collapse" id="subnavbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Añadir item</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link disabled" href="#">Eliminar item</a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Ordenar por...
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item btn-dropdown--active" href="#">Nombre</a>
+                    <a class="dropdown-item btn-dropdown" href="#">Precio</a>
+                  </div>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Opciones
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item btn-dropdown" href="#">Sumar IVA a todos los items</a>
+                    <a class="dropdown-item btn-dropdown" href="#">Cambiar nombre de carrito</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item disabled btn-dropdown" href="#">Limpiar carrito</a>
+                  </div>
+                </li>
+              </ul>
+              <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn subnavbar__search-btn btn-primary my-2 my-sm-0" type="submit">Search</button>
+              </form>
+            </div>
+          </nav>
+          
+          <div class="row d-flex mt-3">
+            <div id="items-list" class="list-group list-group-flush w-75 mx-auto" id="list-tab" role="tablist">
+              <a class="row text-center mb-3">
+                <div class="col-2">Id</div>
+                <div class="col-6">Item name</div>
+                <div class="col-2">Price</div>
+              </a>
+              <a class="list-group-item list-group-item-action" href="#" role="tab" data-toggle="list" >
+                <div class="col-12">
+                  <div class="col-2 float-left">1</div>
+                  <div class="col-7 float-left">Test test</div>
+                  <div class="col-3 float-left">$1500</div>
+                </div>
+              </a>
+              <a class="list-group-item list-group-item-action" href="#" role="tab" data-toggle="list" >
+                <div class="col-12">
+                  <div class="col-2 float-left">2</div>
+                  <div class="col-7 float-left">Test2 test</div>
+                  <div class="col-3 float-left">$100</div>
+                </div>
+              </a>
+              <a class="list-group-item list-group-item-action" href="#" role="tab" data-toggle="list" >
+                <div class="col-12">
+                  <div class="col-2 float-left">3</div>
+                  <div class="col-7 float-left">Test3 test</div>
+                  <div class="col-3 float-left">$15030</div>
+                </div>
+              </a>
+            </div>
+          </div>
+       </div>
+    </div>
+ </section>
+
+  <!-- Footer -->
+  <footer class="footer bgDark">
+    <div class="container">
+       <span class="footer__brand brand" href="#"></span>
+       <ul class="list-inline">
+          <li class="footer__item--menu list-inline-item footer-menu"><a href="#">Home</a></li>
+       </ul>
+       <ul class="list-inline">
+          <li class="footer__item list-inline-item"><a href="#" target="__blank"><img src="../assets/img/instagram.svg" alt="" class="footer__item-img img-fluid"></a></li>
+          <li class="footer__item list-inline-item"><a href="#" target="__blank"><img src="../assets/img/twitter.svg" alt="" class="footer__item-img img-fluid"></a></li>
+          <li class="footer__item list-inline-item"><a href="#" target="__blank"><img src="../assets/img/youtube.svg" alt="" class="footer__item-img img-fluid"></a></li>
+          <li class="footer__item list-inline-item"><a href="#" target="__blank"><img src="../assets/img/facebook.svg" alt="" class="footer__item-img img-fluid"></a></li>
+       </ul>
+       <small>©2021 All Rights Reserved.</small>
+    </div>
+ </footer>
+
+  <!-- Register modal -->
+  <div class="modal fade" id="modal-register" tabindex="-1" role="dialog" aria-labelledby="modal-register-label" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+            
+            <div class="modal-header">
+              <h3 class="modal-title" id="modal-register-label">Registrarse</h3>
+              <button type="button" class="close" data-dismiss="modal">
+                  <span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span>
+              </button>
+            </div>
+            
+            <div class="modal-body">
+                  <form role="form" action="" method="post" class="registration-form">
+                    <div class="form-group">
+                      <label class="sr-only" for="form-first-name">Nombre</label>
+                      <input id="register-name" type="text" name="form-first-name" placeholder="Nombre" class="form-first-name form-control" id="form-first-name">
+                    </div>
+                    <div class="form-group">
+                      <label class="sr-only" for="form-last-name">Apellido</label>
+                      <input id="register-surname" type="text" name="form-last-name" placeholder="Apellido" class="form-last-name form-control" id="form-last-name">
+                    </div>
+                    <div class="form-group">
+                      <label class="sr-only" for="form-email">Email</label>
+                      <input id="register-email" type="email" name="form-email" placeholder="Email" class="form-email form-control" id="form-email">
+                    </div>
+                    <div class="form-group">
+                      <label class="sr-only" for="form-password">Contraseña</label>
+                      <input id="register-passwd" type="password" name="form-passwork" placeholder="Contraseña" class="form-password form-control" id="form-password">
+                    </div>
+                    <button id="register-btn" type="submit" class="btn-primary btn-register w-100">Registrarse</button>
+                  </form>
+            </div>
+            
+        </div>
+      </div>
+  </div>
+
+  <!-- JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jsSHA/2.0.2/sha.js"></script>
+  <script src="../assets/js/utils/scroll.js"></script>
+  <script type="module" src="../assets/js/main.js"></script>
+  <script type="module" src="../assets/js/components/register-modal.js"></script>
+  <script type="module" src="../assets/js/components/login.js"></script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+// Buttons
+.btn {
+	@include border-radius(2px);
+
+	font-size: 14px;
+	padding: 15px 26px;
+	min-width: 160px;
+	display: inline-block;
+}
+
+.btn-primary {
+	@include transition(all .3s);
+
+	background-color: $dark-color;
+	color: white;
+	border: 2px solid $dark-color;
+
+	&:hover {
+		background-color: $dark-color;
+		border: 2px solid $dark-color;
+	}
+
+	&--dark {
+		@extend .btn-primary;
+		
+		background-color: white;
+		color: $dark-color;
+		border: 2px solid white;
+
+		&:hover {
+			background-color: white;
+			color: $dark-color;
+			border: 2px solid white;
+		}
+	}
+}
+
+.btn-register {
+	font-family: $font_0, $font_2;
+	font-size: 16px;
+	line-height: 50px;
+}
+
+.btn-dropdown {
+	@include transition(all .3s);
+
+	background-color: white;
+	color: $dark-color;
+	text-decoration: none;
+
+	&--active,
+	&:active {
+		color: #fff;
+		background-color: $color_gray !important;
+	}
+}
