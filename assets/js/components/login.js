@@ -35,6 +35,7 @@ $(document).ready(function() {
             }
         }
 
+        location.reload();
         return false;
     });
 });

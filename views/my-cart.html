@@ -75,7 +75,7 @@
           <h2 class="text-center">Carrito</h2>
 
           <nav class="navbar navbar-expand-lg navbar-light">
-            <a class="navbar-brand" href="#">Nombre de carrito</a>
+            <a id="cart-name" class="navbar-brand" href="#"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#subnavbarSupportedContent" aria-controls="subnavbarSupportedContent" aria-expanded="false" aria-label="Toggle subnavigation">
               <span class="navbar-toggler-icon"></span>
             </button>
@@ -83,10 +83,10 @@
             <div class="collapse navbar-collapse" id="subnavbarSupportedContent">
               <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Añadir item</span></a>
+                  <a class="nav-link launch-modal" href="#" data-modal-id="modal-add-item">Añadir item</span></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link disabled" href="#">Eliminar item</a>
+                  <a id="delete-item-btn" class="nav-link disabled" href="#">Eliminar item</a>
                 </li>
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -120,29 +120,9 @@
             <div id="items-list" class="list-group list-group-flush w-75 mx-auto" id="list-tab" role="tablist">
               <a class="row text-center mb-3">
                 <div class="col-2">Id</div>
-                <div class="col-6">Item name</div>
-                <div class="col-2">Price</div>
-              </a>
-              <a class="list-group-item list-group-item-action" href="#" role="tab" data-toggle="list" >
-                <div class="col-12">
-                  <div class="col-2 float-left">1</div>
-                  <div class="col-7 float-left">Test test</div>
-                  <div class="col-3 float-left">$1500</div>
-                </div>
-              </a>
-              <a class="list-group-item list-group-item-action" href="#" role="tab" data-toggle="list" >
-                <div class="col-12">
-                  <div class="col-2 float-left">2</div>
-                  <div class="col-7 float-left">Test2 test</div>
-                  <div class="col-3 float-left">$100</div>
-                </div>
-              </a>
-              <a class="list-group-item list-group-item-action" href="#" role="tab" data-toggle="list" >
-                <div class="col-12">
-                  <div class="col-2 float-left">3</div>
-                  <div class="col-7 float-left">Test3 test</div>
-                  <div class="col-3 float-left">$15030</div>
-                </div>
+                <div class="col-4">Nombre de item</div>
+                <div class="col-3">Precio</div>
+                <div class="col-2">Con IVA</div>
               </a>
             </div>
           </div>
@@ -205,12 +185,47 @@
       </div>
   </div>
 
+  <!-- Add item modal -->
+  <div class="modal fade" id="modal-add-item" tabindex="-1" role="dialog" aria-labelledby="modal-add-item-label" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+          
+          <div class="modal-header">
+            <h3 class="modal-title" id="modal-add-item-label">Añadir item</h3>
+            <button type="button" class="close" data-dismiss="modal">
+                <span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span>
+            </button>
+          </div>
+          
+          <div class="modal-body">
+                <form role="form" action="" method="post" class="add-item-form">
+                  <div class="form-group">
+                    <label class="sr-only" for="form-first-name">Nombre</label>
+                    <input id="add-item-name" type="text" name="form-first-name" placeholder="Nombre" class="form-first-name form-control" id="form-first-name">
+                  </div>
+                  <div class="form-group">
+                    <label class="sr-only" for="form-last-name">Precio</label>
+                    <input id="add-item-price" type="number" name="form-last-name" placeholder="Precio" class="form-last-name form-control" id="form-last-name">
+                  </div>
+                  <div class="form-check text-center">
+                    <input id="add-item-iva" type="checkbox" class="form-check-input text-center" id="form-check-iva">
+                    <label class="form-check-label" for="form-check-iva">Con IVA?</label>
+                  </div>
+                  <button id="add-item-btn" type="submit" class="btn-primary w-100">Añadir</button>
+                </form>
+          </div>
+          
+      </div>
+    </div>
+</div>
+
   <!-- JS -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jsSHA/2.0.2/sha.js"></script>
   <script src="../assets/js/utils/scroll.js"></script>
   <script type="module" src="../assets/js/main.js"></script>
+  <script type="module" src="../assets/js/views/my-cart.js"></script>
   <script type="module" src="../assets/js/components/register-modal.js"></script>
   <script type="module" src="../assets/js/components/login.js"></script>
 </body>
