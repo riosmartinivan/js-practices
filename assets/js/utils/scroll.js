@@ -1,18 +1,18 @@
-(function() {
+$(document).ready(function() {
 
-    var doc = document.documentElement;
-    var w = window;
+    let doc = document.documentElement;
+    let w = window;
 
-    var prevScroll = w.scrollY || doc.scrollTop;
-    var curScroll;
-    var direction = 0;
-    var prevDirection = 0;
+    let prevScroll = w.scrollY || doc.scrollTop;
+    let curScroll;
+    let direction = 0;
+    let prevDirection = 0;
 
     /* Find the navbar and the height of the navbar */
-    var header = document.getElementById("nav-container");
-    var headerHeight = header.clientHeight;
+    let header = document.getElementById("nav-container");
+    let headerHeight = header.clientHeight;
 
-    var checkScroll = function() {
+    let checkScroll = function() {
 
         /*
          ** Find the direction of scroll
@@ -35,7 +35,7 @@
     };
 
     /* Use the height of the navbar to movify the top property to hide the navbar */
-    var toggleHeader = function(direction, curScroll) {
+    let toggleHeader = function(direction, curScroll) {
         if (direction === 2 && curScroll > headerHeight) {
             header.style.top = "-" + headerHeight + "px";
             prevDirection = direction;
@@ -47,4 +47,4 @@
 
     window.addEventListener("scroll", checkScroll);
 
-})();
+});

@@ -7,10 +7,18 @@
  * @param {boolean} withIVA if the item includes IVA.
  */
 export class Item {
-    constructor(name, price, withIVA) {
-        this.name = name;
-        this.price = price;
-        this.withIVA = withIVA;
+    constructor(id, name, price, withIVA, data) {
+        if (data === null || data === undefined) {
+            this.id = id;
+            this.name = name;
+            this.price = parseFloat(price);
+            this.withIVA = withIVA;
+        } else {
+            this.id = parseInt(data.id);
+            this.name = data.name;
+            this.price = parseFloat(data.price);
+            this.withIVA = data.withIVA;
+        }
     }
 
     /**

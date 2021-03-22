@@ -1,4 +1,4 @@
-import { isNumber, removeItem, capitalizeFirstLetter } from './util.js';
+import { removeItem } from './util.js';
 import { Item } from '../model/Item.js';
 import { Cart } from '../model/Cart.js';
 
@@ -14,7 +14,7 @@ export function addItems(cart) {
             break;
         }
 
-        let name = capitalizeFirstLetter(prompt("Ingrese el nombre del item"));
+        let name = prompt("Ingrese el nombre del item");
 
         let iva;
         while (true) {
@@ -28,7 +28,7 @@ export function addItems(cart) {
             }
         }
 
-        cart.addItem(new Item(name, parseFloat(input), iva));
+        cart.addItem(new Item(name, parseFloat(input), iva, null));
     }
 }
 

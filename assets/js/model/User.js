@@ -19,10 +19,11 @@ export class User {
                 this.id = (sessionStorage.getItem("users") !== null)
                     ? sessionStorage.getItem("users").length : 0;
             } else {
-                this.id = id;
+                this.id = parseInt(id);
             }
             this.name = name;
             this.email = email.toLowerCase();
+            this.cart = new Cart("Mi carrito", null);
 
             let hashObj = new jsSHA("SHA-512", "TEXT", {numRounds: 1});
             hashObj.update(passwd);
@@ -30,9 +31,10 @@ export class User {
             
             this.passwd = hash;
         } else {
-            this.id = data.id;
+            this.id = parseInt(data.id);
             this.name = data.name;
             this.email = data.email;
+            this.cart = new Cart(null, data.cart);
         }
     }
 
@@ -46,6 +48,8 @@ export class User {
         if (users === null) users = [];
         users[this.id] = this;
 
+        console.log("Saving users: " + JSON.stringify(users));
+
         sessionStorage.setItem("users", JSON.stringify(users));
         console.log("User saved correctly");
 
@@ -58,10 +62,10 @@ export class User {
      * @param {number} id the user id.
      * @returns {User} the user.
      */
-     getUser = function(id) {
+     static getUser = function(id) {
         let users = JSON.parse(sessionStorage.getItem("users"));
         if (users !== null) {
-            let user = new User(null, null, null, null, JSON.parse(users[id]));
+            let user = new User(null, null, null, null, users[id]);
             user.valid = true;
             return user;
         }
@@ -93,43 +97,5 @@ export class User {
             this.valid = false;
             return false;
         }
-    }
-
-    /**
-     * Gets the user's cart.
-     * 
-     * @returns {Cart} the user's cart.
-     */
-    getCart = function() {
-        if (this.valid === undefined) {
-            this.validate();
-        }
-        if (this.valid === false) {
-            console.error("User not valid");
-            return undefined;
-        }
-
-        let users = JSON.parse(sessionStorage.getItem("users"));
-        return users[this.id].cart;
-    }
-
-    /**
-     * Saves a cart.
-     * 
-     * @param {Cart} cart the cart to be saved.
-     */
-    saveCart = function(cart) {
-        if (this.valid === undefined) {
-            this.validate();
-        }
-        if (this.valid === false) {
-            console.error("User not valid");
-            return undefined;
-        }
-
-        let users = JSON.parse(sessionStorage.getItem("users"));
-        users[this.id].cart = cart;
-
-        sessionStorage.setItem("users", JSON.stringify(users));
     }
 };
